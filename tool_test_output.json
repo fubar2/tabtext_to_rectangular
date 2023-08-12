@@ -1,0 +1,79 @@
+{
+    "summary": {
+        "num_errors": 0,
+        "num_failures": 0,
+        "num_skips": 0,
+        "num_tests": 1
+    },
+    "tests": [
+        {
+            "data": {
+                "inputs": {
+                    "fillstring": "NaN",
+                    "header": "",
+                    "input_tab": {
+                        "id": "742a6525fd480aba",
+                        "src": "hda"
+                    },
+                    "squishempty": "set"
+                },
+                "job": {
+                    "command_line": "python /tmp/tmpt1pzt_t8/job_working_directory/000/2/configs/tmpy88iul3h --input_tab /tmp/tmpt1pzt_t8/files/a/5/9/dataset_a59c9d34-fb6b-48c3-8e8a-e85915d72788.dat --output_tab /tmp/tmpt1pzt_t8/job_working_directory/000/2/outputs/galaxy_dataset_14e7582f-95b4-4027-a9b4-515ee637da26.dat --header '' --fillstring 'NaN' --remove_empty_rows",
+                    "command_version": "0.0001",
+                    "create_time": "2023-08-12T07:17:31.614033",
+                    "dependencies": [],
+                    "exit_code": 0,
+                    "external_id": "2552663",
+                    "galaxy_version": "23.0",
+                    "history_id": "742a6525fd480aba",
+                    "id": "e37d6ec797e27887",
+                    "inputs": {
+                        "input_tab": {
+                            "id": "742a6525fd480aba",
+                            "src": "hda",
+                            "uuid": "a59c9d34-fb6b-48c3-8e8a-e85915d72788"
+                        }
+                    },
+                    "job_messages": [],
+                    "job_metrics": [],
+                    "job_stderr": "",
+                    "job_stdout": "",
+                    "model_class": "Job",
+                    "output_collections": {},
+                    "outputs": {
+                        "output_tab": {
+                            "id": "e37d6ec797e27887",
+                            "src": "hda",
+                            "uuid": "14e7582f-95b4-4027-a9b4-515ee637da26"
+                        }
+                    },
+                    "params": {
+                        "__input_ext": "\"txt\"",
+                        "chromInfo": "\"/home/ross/galaxy-release_21.01/tool-data/shared/ucsc/chrom/?.len\"",
+                        "dbkey": "\"?\"",
+                        "fillstring": "\"NaN\"",
+                        "header": "\"\"",
+                        "squishempty": "\"set\""
+                    },
+                    "state": "ok",
+                    "stderr": "",
+                    "stdout": "lens= [3, 5, 2, 3, 3]\n##torectangular_tab_tool processing infile /tmp/tmpt1pzt_t8/files/a/5/9/dataset_a59c9d34-fb6b-48c3-8e8a-e85915d72788.dat found lines with max 5 and min 2 fields\n",
+                    "tool_id": "torectangulartabulartool",
+                    "tool_stderr": "",
+                    "tool_stdout": "lens= [3, 5, 2, 3, 3]\n##torectangular_tab_tool processing infile /tmp/tmpt1pzt_t8/files/a/5/9/dataset_a59c9d34-fb6b-48c3-8e8a-e85915d72788.dat found lines with max 5 and min 2 fields\n",
+                    "traceback": null,
+                    "update_time": "2023-08-12T07:17:36.672998",
+                    "user_email": "planemo@galaxyproject.org"
+                },
+                "status": "success",
+                "test_index": 0,
+                "time_seconds": 14.05672287940979,
+                "tool_id": "torectangulartabulartool",
+                "tool_version": "0.0001"
+            },
+            "has_data": true,
+            "id": "torectangulartabulartool-0"
+        }
+    ],
+    "version": "0.1"
+}

@@ -1,0 +1,110 @@
+<tool name="torectangulartabulartool" id="torectangulartabulartool" version="0.0001">
+  <!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay-->
+  <!--Created by toolfactory@galaxy.org at 12/08/2023 16:51:21 using the Galaxy Tool Factory.-->
+  <description>Regularise a ragged tabular file with irregular numbers of fields per row</description>
+  <requirements/>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+  </stdio>
+  <version_command><![CDATA[echo "0.0001"]]></version_command>
+  <command><![CDATA[python
+$runme
+--input_tab
+$input_tab
+--output_tab
+$output_tab
+--header
+'$header'
+--fillstring
+'$fillstring'
+#if $squishempty == "set"
+ --remove_empty_rows
+#end if]]></command>
+  <configfiles>
+    <configfile name="runme"><![CDATA[#raw
+
+# python script for ToolFactory tool to regularise a tabular file
+# finds the longest line and pads all others to the same length with an optional string or blank
+# ross lazarus in response to
+# https://matrix.to/#/!IEcbSOGXlqPpSmwmPp:gitter.im/$kMtqMiDfGEZ-apT6Wnv5FFe2Np07Ga19pQxXL7xR8n0?via=gitter.im&via=matrix.org&via=sys.reslate.net
+
+import argparse
+import sys
+
+
+parser = argparse.ArgumentParser()
+a = parser.add_argument
+a('--input_tab', required=True)
+a('--header', default='')
+a('--delim', default='\t')
+a('--fillstring', default='')
+a('--output_tab', required= True)
+a('--remove_empty_rows', action='store_true')
+args = parser.parse_args()
+d  = open(args.input_tab, 'r').read()
+d = d.split('\n')
+if args.remove_empty_rows:
+    d = [x for x in d if args.delim in x]
+d = [x.split(args.delim) for x in d]
+lens = [len(x) for x in d]
+print('lens=',lens)
+maxlen = max(lens)
+minlen = min(lens)
+if maxlen == 1:
+    print('### possible input error - no tabs found - is this really a tab delimited input file?')
+    sys.exit(2)
+print(f'##torectangular_tab_tool processing infile {args.input_tab} found lines with max {maxlen} and min {minlen} fields')
+if minlen == maxlen:
+    print(f'## all rows of {args.input_tab} are the same {maxlen} length - output is identical to input!')
+else:
+    for i, row in enumerate(d):
+        l = lens[i]
+        if l < maxlen:
+            if l > 1:
+                fill = [args.fillstring for x in range(maxlen - l)]
+                d[i] = row + fill
+            else:
+                fill = [args.fillstring for x in range(maxlen)]
+                d[i] = fill
+outf = open(args.output_tab, 'w')
+d = [args.delim.join(x) for x in d]
+outf.write('\n'.join(d))
+outf.write('\n')
+outf.close()
+
+
+#end raw]]></configfile>
+  </configfiles>
+  <inputs>
+    <param name="input_tab" type="data" optional="false" label="Input delimited file from your history with non-regular numbers of columns" help="" format="csv,tabular,txt" multiple="false"/>
+    <param name="header" type="text" value="" label="Insert these comma delimited column names as the new file header" help="default is blank for no new header"/>
+    <param name="fillstring" type="text" value="NaN" label="Use this string as the filler for empty columns when expanding rows" help=""/>
+    <param name="squishempty" type="select" label="Squish empty rows if set. Blank lines will disappear rather than get padded to the maximum line length. " help="If not set, empty rows in the input will be filled with fillstring">
+      <option value="set">Set this flag</option>
+      <option value="notset">Do not set this flag</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="output_tab" format="tabular" label="to_rectangular_tab_tool run on $input_tab.element_identifier" hidden="false"/>
+  </outputs>
+  <tests>
+    <test>
+      <output name="output_tab" value="output_tab_sample" compare="diff" lines_diff="0"/>
+      <param name="input_tab" value="input_tab_sample"/>
+      <param name="header" value=""/>
+      <param name="fillstring" value="NaN"/>
+      <param name="squishempty" value="set"/>
+    </test>
+  </tests>
+  <help><![CDATA[
+
+**What it Does**
+
+Generates a regular, rectangular tabular file from input in irregular, ragged format. 
+
+ ]]></help>
+  <citations>
+    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+  </citations>
+</tool>
+
