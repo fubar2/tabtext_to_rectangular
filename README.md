@@ -10,7 +10,7 @@ Let me know please.
 This tool wraps a [python script](https://github.com/fubar2/tabtext_to_rectangular/blob/main/rectangular_tab_tool.py) to do the work.
 It is in the repository and is incorporated into the tool with some small test data.
 
-ToolFactory Galaxy Training Network tutorials [ are available here](https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html)
+ToolFactory Galaxy Training Network tutorials [are available here](https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html)
 
 The ToolFactory history that generated this tool can be imported into any ToolFactory docker or local instance from
 [https://github.com/fubar2/tabtext_to_rectangular/blob/main/Galaxy-History-torectangulartabtool.tar.gz](https://github.com/fubar2/tabtext_to_rectangular/blob/main/Galaxy-History-torectangulartabtool.tar.gz)
